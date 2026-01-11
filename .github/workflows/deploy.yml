@@ -19,9 +19,9 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: |
+          script: |            
+            rm -rf /var/www/vhosts/pocketest.ferter.es/httpdocs
+            git clone git@github.com:ferter3006/new-test.git /var/www/vhosts/pocketest.ferter.es/httpdocs
             cd /var/www/vhosts/pocketest.ferter.es/httpdocs
-            git fetch origin
-            git reset --hard origin/master
             /usr/bin/go build -o /opt/pocketbase/pocketbase main.go
             sudo systemctl restart pocketbase
