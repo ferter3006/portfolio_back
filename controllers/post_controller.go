@@ -29,5 +29,5 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 
 func HiWorld(e *core.RequestEvent) error {
 	return e.JSON(http.StatusOK, map[string]string{
-		"message": "Hello, World! desde controller - New push 08"})
+		"message": "Hello, World! desde controller - New push 09"})
 }
