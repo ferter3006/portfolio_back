@@ -25,3 +25,4 @@ jobs:
             cd /var/www/vhosts/pocketest.ferter.es/httpdocs
             /usr/bin/go build -o /opt/pocketbase/pocketbase main.go
             sudo systemctl restart pocketbase
+            
