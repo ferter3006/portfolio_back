@@ -31,6 +31,6 @@ func HiWorld(e *core.RequestEvent) error {
 	return e.JSON(http.StatusOK, map[string]string{
 		"message":     "Hello, World!",
 		"version":     "14-ene-2026",
-		"last update": "restored superuser access!",
+		"last update": "restored superuser access!!",
 	})
 }
