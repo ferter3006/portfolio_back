@@ -29,5 +29,8 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 
 func HiWorld(e *core.RequestEvent) error {
 	return e.JSON(http.StatusOK, map[string]string{
-		"message": "Hello, World! desde controller - New push 09"})
+		"message":     "Hello, World!",
+		"version":     "14-ene-2026",
+		"last update": "restored superuser access",
+	})
 }
