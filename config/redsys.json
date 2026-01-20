@@ -1,0 +1,7 @@
+{
+  "merchant_code": "999008881",
+  "terminal": "1",
+  "secret_key": "qwertyasdf0123456789qwertyasdf0123456789qwertyasdf0123",
+  "currency": "978",
+  "test_url": "https://sis-t.redsys.es:25443/sis/realizarPago"
+}

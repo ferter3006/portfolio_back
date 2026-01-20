@@ -25,6 +25,24 @@ func main() {
 
 		se.Router.GET("/hi2", controllers.HiWorld)
 
+		// Redsys config
+		redsysCfg, err := controllers.LoadRedsysConfigFromDefault()
+		if err != nil {
+			return err
+		}
+
+		// Endpoint para iniciar pago
+		se.Router.GET("/redsys/pay", func(e *core.RequestEvent) error {
+			controllers.RedsysPayHandler(redsysCfg)(e.Response, e.Request)
+			return nil
+		})
+
+		// Endpoint para notificación
+		se.Router.POST("/redsys/notify", func(e *core.RequestEvent) error {
+			controllers.RedsysNotifyHandler(redsysCfg)(e.Response, e.Request)
+			return nil
+		})
+
 		return se.Next()
 	})
 
