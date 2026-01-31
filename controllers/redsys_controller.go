@@ -8,9 +8,10 @@ import (
 	"net/http"
 
 	"crypto/hmac"
-	"crypto/sha256"
+	"crypto/sha512"
 
-	"github.com/google/uuid"
+	"math/rand"
+	"time"
 
 	"new-test/config"
 )
@@ -29,13 +30,15 @@ type RedsysPaymentRequest struct {
 	ProductDesc string
 }
 
+// Redsys requiere un número de pedido de 12 dígitos numéricos
 func GenerateOrderID() string {
-	return uuid.New().String()[:12]
+	rand.Seed(time.Now().UnixNano())
+	return fmt.Sprintf("%012d", rand.Int63n(1_000_000_000_000))
 }
 
 func createSignature(secret, data string) string {
 	key, _ := base64.StdEncoding.DecodeString(secret)
-	h := hmac.New(sha256.New, key)
+	h := hmac.New(sha512.New, key)
 	h.Write([]byte(data))
 	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
@@ -64,20 +67,21 @@ func RedsysPayHandler(cfg *config.RedsysConfig) http.HandlerFunc {
 
 		jsonParams, _ := json.Marshal(params)
 		merchantParams := base64.StdEncoding.EncodeToString(jsonParams)
+
 		signature := createSignature(cfg.SecretKey, merchantParams)
 
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
 		form := `<form id="redsysForm" action="` + cfg.TestURL + `" method="POST">
-			<input type="hidden" name="Ds_SignatureVersion" value="HMAC_SHA256_V1" />
-			<input type="hidden" name="Ds_MerchantParameters" value="` + merchantParams + `" />
-			<input type="hidden" name="Ds_Signature" value="` + signature + `" />
-		</form>
-		<script>document.getElementById('redsysForm').submit();</script>`
+			   <input type="hidden" name="Ds_SignatureVersion" value="HMAC_SHA512_V2" />
+			   <input type="hidden" name="Ds_MerchantParameters" value="` + merchantParams + `" />
+			   <input type="hidden" name="Ds_Signature" value="` + signature + `" />
+		   </form>
+		   <script>document.getElementById('redsysForm').submit();</script>`
 		tmpl, _ := template.New("form").Parse(form)
 		tmpl.Execute(w, nil)
 
-		fmt.Print("form generated")
+		fmt.Print(form)
 
 	}
 }

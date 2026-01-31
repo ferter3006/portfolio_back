@@ -43,6 +43,10 @@ func main() {
 			return nil
 		})
 
+		se.Router.GET("/api/polling-token/{id}", func(e *core.RequestEvent) error {
+			return controllers.GodotPollingHandler(app, e)
+		})
+
 		return se.Next()
 	})
 
