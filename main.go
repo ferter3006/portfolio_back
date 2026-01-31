@@ -25,6 +25,7 @@ func main() {
 
 		se.Router.GET("/hi2", controllers.HiWorld)
 
+<<<<<<< HEAD
 		// Redsys config
 		redsysCfg, err := controllers.LoadRedsysConfigFromDefault()
 		if err != nil {
@@ -47,6 +48,8 @@ func main() {
 			return controllers.GodotPollingHandler(app, e)
 		})
 
+=======
+>>>>>>> d6452fd45d5dd75cc3f178feb2e65de83731d9eb
 		return se.Next()
 	})
 
