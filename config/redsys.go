@@ -7,10 +7,10 @@ import (
 
 type RedsysConfig struct {
 	MerchantCode string `json:"merchant_code"`
-	Terminal    string `json:"terminal"`
-	SecretKey   string `json:"secret_key"`
-	Currency    string `json:"currency"`
-	TestURL     string `json:"test_url"`
+	Terminal     string `json:"terminal"`
+	SecretKey    string `json:"secret_key"`
+	Currency     string `json:"currency"`
+	TestURL      string `json:"test_url"`
 }
 
 func LoadRedsysConfig(path string) (*RedsysConfig, error) {
