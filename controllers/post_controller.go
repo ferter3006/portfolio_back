@@ -27,10 +27,10 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(post)
 }
 
-func HiWorld(e *core.RequestEvent) error {
+func Version(e *core.RequestEvent) error {
 	return e.JSON(http.StatusOK, map[string]string{
 		"message":     "Hello, World!",
-		"version":     "14-ene-2026",
-		"last update": "restored superuser access!!",
+		"version":     "08-feb-2026",
+		"last update": "new Deploy action!",
 	})
 }

@@ -23,7 +23,7 @@ func main() {
 			return e.JSON(http.StatusOK, map[string]bool{"success": true})
 		})
 
-		se.Router.GET("/hi2", controllers.HiWorld)
+		se.Router.GET("/version", controllers.Version)
 
 		// Redsys config
 		redsysCfg, err := controllers.LoadRedsysConfigFromDefault()
