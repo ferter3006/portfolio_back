@@ -1,0 +1,14 @@
+{
+  "title": {
+    "es": "Gestor de Tareas - Proyecto Paralelo",
+    "ca": "Gestor de Tasques - Projecte Paral·lel",
+    "en": "Task Manager - Side Project",
+    "fr": "Gestionnaire de Tâches - Projet Parallèle"
+  },
+  "description": {
+    "es": "Este es un proyecto paralelo para gestionar tareas, incluyendo su descripción y los diferentes estados en los que pueden encontrarse.",
+    "ca": "Aquest és un projecte paral·lel per gestionar tasques, incloent-ne la descripció i els diferents estats en què poden trobar-se.",
+    "en": "This is a side project designed to manage tasks, including their description and the different states they can have.",
+    "fr": "Il s'agit d'un projet parallèle conçu pour gérer des tâches, y compris leur description et les différents états qu'elles peuvent avoir."
+  }
+}
