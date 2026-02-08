@@ -19,11 +19,14 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: |            
-            rm -rf /var/www/vhosts/pocketest.ferter.es/httpdocs
-            git clone git@github.com:ferter3006/pocketest.git /var/www/vhosts/pocketest.ferter.es/httpdocs
-            cd /var/www/vhosts/pocketest.ferter.es/httpdocs
+          script: |
+            # Clonar en carpeta temporal
+            rm -rf /tmp/pocketest-deploy
+            git clone git@github.com:ferter3006/pocketest.git /tmp/pocketest-deploy
+            cd /tmp/pocketest-deploy
             /usr/bin/go build -o /opt/pocketbase/pocketbase main.go
             cp config/ /opt/pocketbase/config/ -r
+            # Copiar solo archivos necesarios, sin pb_data
+            rsync -av --exclude='pb_data' --exclude='.git' . /var/www/vhosts/pocketest.ferter.es/httpdocs/
             sudo systemctl restart pocketbase
             
